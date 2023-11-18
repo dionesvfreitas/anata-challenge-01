@@ -1,12 +1,12 @@
 import {Parking, Vehicle} from "../models";
 import {ParkingRepository} from "../repository";
-import {VehicleAlreadyParkedException} from "../exceptions";
+import {VehicleAlreadyParkedException, VehicleNotParkedException} from "../exceptions";
 
 export class ParkingService {
   constructor(private readonly parkingRepository: ParkingRepository) {}
 
   public checkIn(plate: string): Parking {
-    let parkingFound: Parking = this.parkingRepository.findByPlate(plate);
+    let parkingFound: Parking = this.findByPlate(plate);
     if (parkingFound && parkingFound.getVehicle().isParked()) {
       throw new VehicleAlreadyParkedException(plate);
     }
@@ -27,5 +27,17 @@ export class ParkingService {
 
   public findByPlate(plate: string): Parking|null {
     return this.parkingRepository.findByPlate(plate);
+  }
+
+  public checkOut(plate: string): Parking {
+    let parkingFound: Parking = this.findByPlate(plate);
+    if (!parkingFound || !parkingFound.getVehicle().isParked()) {
+      throw new VehicleNotParkedException(plate);
+    }
+
+    parkingFound.executeCheckOut();
+    this.parkingRepository.save(parkingFound);
+
+    return parkingFound;
   }
 }
