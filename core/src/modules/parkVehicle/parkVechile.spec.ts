@@ -126,6 +126,13 @@ describe('ParkVehicle', (): void => {
           Settings.now = () => dateInTheFuture.toMillis();
           parkedVehicle = parkingService.checkOut(plate);
           expect(parkedVehicle.getTotalValue()).toBe(FirstHourRule.HOUR_VALUE + AdditionalHourRule.HOUR_VALUE);
+
+          parkingService.checkIn(plate);
+          dateInTheFuture = DateTime.now().plus(Duration.fromObject({hours: 3, minutes: 59}));
+          Settings.now = () => dateInTheFuture.toMillis();
+          parkedVehicle = parkingService.checkOut(plate);
+          expect(parkedVehicle.getTotalValue())
+            .toBe(FirstHourRule.HOUR_VALUE + (3 * AdditionalHourRule.HOUR_VALUE));
         });
       });
     });
