@@ -1,6 +1,8 @@
+import {OutsideState, ParkingState} from "./parkingState";
+
 export class Vehicle {
   private plate: string;
-  private _isParked: boolean = false;
+  private _parkingState: ParkingState = new OutsideState();
 
   public getPlate(): string {
     return this.plate;
@@ -11,12 +13,12 @@ export class Vehicle {
     return this;
   }
 
-  public isParked(): boolean {
-    return this._isParked;
+  public getParkingState(): ParkingState {
+    return this._parkingState;
   }
 
-  public setParked(isParked: boolean): Vehicle {
-    this._isParked = isParked;
+  public setParkingState(parkingState: ParkingState): Vehicle {
+    this._parkingState = parkingState;
     return this;
   }
 }

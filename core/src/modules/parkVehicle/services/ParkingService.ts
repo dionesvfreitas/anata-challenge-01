@@ -7,9 +7,6 @@ export class ParkingService {
 
   public checkIn(plate: string): Parking {
     let parkingFound: Parking = this.findByPlate(plate);
-    if (parkingFound && parkingFound.getVehicle().isParked()) {
-      throw new VehicleAlreadyParkedException(plate);
-    }
 
     if (parkingFound === null) {
       const vehicle: Vehicle = new Vehicle();
@@ -31,7 +28,7 @@ export class ParkingService {
 
   public checkOut(plate: string): Parking {
     let parkingFound: Parking = this.findByPlate(plate);
-    if (!parkingFound || !parkingFound.getVehicle().isParked()) {
+    if (!parkingFound) {
       throw new VehicleNotParkedException(plate);
     }
 

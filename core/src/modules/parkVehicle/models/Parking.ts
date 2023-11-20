@@ -19,12 +19,12 @@ export class Parking {
   }
 
   public executeCheckIn(): void {
-    this._vehicle.setParked(true);
+    this._vehicle.getParkingState().goInside(this._vehicle);
     this.startDate = DateTimeHelper.now();
   }
 
   public executeCheckOut(): void {
-    this._vehicle.setParked(false);
+    this._vehicle.getParkingState().goOutside(this._vehicle)
     this.endDate = DateTimeHelper.now()
   }
 
