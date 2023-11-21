@@ -51,4 +51,12 @@ export class Parking {
 
     return freePeriodRule.getAmountToPay(totalElapsedTimeInMinutes);
   }
+
+  public getStartDate(): DateTime {
+    return this.startDate;
+  }
+
+  public getEndDate(): DateTime {
+    return this.endDate;
+  }
 }
