@@ -4,6 +4,6 @@ export class DateTimeHelper {
   static now(): DateTime {
     return DateTime
       .now()
-      .setZone('utc');
+      .setZone('GMT');
   }
 }
