@@ -23,15 +23,15 @@
     - [ ] Total time parked
     - [ ] Total value to be paid
 - [ ] The system must be able to list all vehicles that are parked at the moment
-- [ ] The system must be able to prevent the parking registration of a vehicle that is already parked
-- [ ] The system must be able to prevent the parking exit registration of a vehicle that is not parked
-- [ ] The system must be able to inform the total value to be paid by the vehicle
+- [x] The system must be able to prevent the parking registration of a vehicle that is already parked
+- [x] The system must be able to prevent the parking exit registration of a vehicle that is not parked
+- [x] The system must be able to inform the total value to be paid by the vehicle
     - [x] The first 15 minutes of parking are free
     - [x] The first hour of parking is R$ 5,00
     - [x] After the first hour, each additional hour is R$ 3,00
     - [x] The value to be paid must be rounded up to the nearest hour
-    - [ ] The system must be able to inform the total time parked by the vehicle
-    - [ ] The system must be able to inform the total value to be paid by the vehicle
+    - [x] The system must be able to inform the total time parked by the vehicle
+    - [x] The system must be able to inform the total value to be paid by the vehicle
 
 
 ## Technologies
