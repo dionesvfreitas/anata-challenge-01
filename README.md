@@ -3,8 +3,8 @@
 ---
 ## Main Features
 
-- [x] Register a new parking
-- [x] Register a parked vehicle exit
+- [x] Register parking entry
+- [x] Register parking exit
 - [ ] List all parked vehicles
 
 ---
@@ -15,14 +15,13 @@
     - [x] Entry date and time
 - [x] The vehicle exit must be registered with the following information:
     - [x] Vehicle plate
-    - [x] Exit date and time
 - [ ] The system must be able to list all parked vehicles with the following information:
     - [ ] Vehicle plate
     - [ ] Entry date and time
     - [ ] Exit date and time
     - [ ] Total time parked
     - [ ] Total value to be paid
-- [ ] The system must be able to list all vehicles that are parked at the moment
+- [x] The system must be able to list all vehicles that are parked at the moment
 - [x] The system must be able to prevent the parking registration of a vehicle that is already parked
 - [x] The system must be able to prevent the parking exit registration of a vehicle that is not parked
 - [x] The system must be able to inform the total value to be paid by the vehicle

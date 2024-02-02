@@ -2,7 +2,9 @@
   "name": "@parking-control/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "test": "nx run-many --target=test"
+  },
   "private": true,
   "devDependencies": {
     "@nx/jest": "17.1.2",
