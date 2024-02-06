@@ -3,10 +3,16 @@ import {
   CalculateParkingAmount,
   RegisterParkingEntry,
 } from '../../src/application/useCases';
+import { RepositoryFactory } from '../../src/domain/repositories';
 
 describe('CalculateParkingAmount', () => {
   const FIRST_HOUR_RATE = 5;
   const ADDITIONAL_HOUR_RATE = 3;
+  let repositoryFactory: RepositoryFactory;
+
+  beforeEach(() => {
+    repositoryFactory = new InMemoryRepositoryFactory();
+  });
 
   afterEach(() => {
     jest.useRealTimers();
@@ -14,9 +20,8 @@ describe('CalculateParkingAmount', () => {
 
   it('should be able to calculate the parking amount for 15 minutes', async () => {
     const plate = 'ABC-1234';
-    const parkingLotRepository =
-      InMemoryRepositoryFactory.getParkingLotRepository();
-    const registerParkingEntry = new RegisterParkingEntry(parkingLotRepository);
+    const parkingLotRepository = repositoryFactory.getParkingLotRepository();
+    const registerParkingEntry = new RegisterParkingEntry(repositoryFactory);
     const calculateParkingAmount = new CalculateParkingAmount();
 
     jest.useFakeTimers().setSystemTime(new Date('2024-02-01T10:00:00Z'));
@@ -37,9 +42,8 @@ describe('CalculateParkingAmount', () => {
 
   it('should be able to calculate the parking amount for 20 minutes', async () => {
     const plate = 'ABC-1234';
-    const parkingLotRepository =
-      InMemoryRepositoryFactory.getParkingLotRepository();
-    const registerParkingEntry = new RegisterParkingEntry(parkingLotRepository);
+    const parkingLotRepository = repositoryFactory.getParkingLotRepository();
+    const registerParkingEntry = new RegisterParkingEntry(repositoryFactory);
     const calculateParkingAmount = new CalculateParkingAmount();
 
     jest.useFakeTimers().setSystemTime(new Date('2024-02-01T10:00:00Z'));
@@ -60,9 +64,8 @@ describe('CalculateParkingAmount', () => {
 
   it('should be able to calculate the parking amount for 1 hour', async () => {
     const plate = 'ABC-1234';
-    const parkingLotRepository =
-      InMemoryRepositoryFactory.getParkingLotRepository();
-    const registerParkingEntry = new RegisterParkingEntry(parkingLotRepository);
+    const parkingLotRepository = repositoryFactory.getParkingLotRepository();
+    const registerParkingEntry = new RegisterParkingEntry(repositoryFactory);
     const calculateParkingAmount = new CalculateParkingAmount();
 
     jest.useFakeTimers().setSystemTime(new Date('2024-02-01T10:00:00Z'));
@@ -83,9 +86,8 @@ describe('CalculateParkingAmount', () => {
 
   it('should be able to calculate the parking amount for more than 1 hour', async () => {
     const plate = 'ABC-1234';
-    const parkingLotRepository =
-      InMemoryRepositoryFactory.getParkingLotRepository();
-    const registerParkingEntry = new RegisterParkingEntry(parkingLotRepository);
+    const parkingLotRepository = repositoryFactory.getParkingLotRepository();
+    const registerParkingEntry = new RegisterParkingEntry(repositoryFactory);
     const calculateParkingAmount = new CalculateParkingAmount();
 
     jest.useFakeTimers().setSystemTime(new Date('2024-02-01T10:00:00Z'));

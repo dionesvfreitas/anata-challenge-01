@@ -4,12 +4,17 @@ import {
   RegisterParkingExit,
 } from '../../src/application/useCases';
 import { DuplicateParkingEntryException } from '../../src/domain/exceptions';
+import { RepositoryFactory } from '../../src/domain/repositories';
 
 describe('RegisterParkingEntry', () => {
+  let repositoryFactory: RepositoryFactory;
+  beforeEach(() => {
+    repositoryFactory = new InMemoryRepositoryFactory();
+  });
+
   it('should be able to register 1 vehicle entry into the parking lot', async () => {
-    const parkingLotRepository =
-      InMemoryRepositoryFactory.getParkingLotRepository();
-    const registerParkingEntry = new RegisterParkingEntry(parkingLotRepository);
+    const parkingLotRepository = repositoryFactory.getParkingLotRepository();
+    const registerParkingEntry = new RegisterParkingEntry(repositoryFactory);
     await registerParkingEntry.execute('ABC-1234');
 
     const quantityOfVehiclesParked =
@@ -19,9 +24,8 @@ describe('RegisterParkingEntry', () => {
   });
 
   it('should be able to register 2 vehicle entry into the parking lot', async () => {
-    const parkingLotRepository =
-      InMemoryRepositoryFactory.getParkingLotRepository();
-    const registerParkingEntry = new RegisterParkingEntry(parkingLotRepository);
+    const parkingLotRepository = repositoryFactory.getParkingLotRepository();
+    const registerParkingEntry = new RegisterParkingEntry(repositoryFactory);
     await registerParkingEntry.execute('ABC-1233');
     await registerParkingEntry.execute('ABC-1234');
 
@@ -34,9 +38,8 @@ describe('RegisterParkingEntry', () => {
     const plate = 'ABC-1234';
     const plate2 = 'ABC-1233';
 
-    const parkingLotRepository =
-      InMemoryRepositoryFactory.getParkingLotRepository();
-    const registerParkingEntry = new RegisterParkingEntry(parkingLotRepository);
+    const parkingLotRepository = repositoryFactory.getParkingLotRepository();
+    const registerParkingEntry = new RegisterParkingEntry(repositoryFactory);
     await registerParkingEntry.execute(plate);
     await registerParkingEntry.execute(plate2);
 
@@ -51,10 +54,9 @@ describe('RegisterParkingEntry', () => {
 
   it('should be able to register 1 vehicle entry after the same vehicle left', async () => {
     const plate = 'ABC-1234';
-    const parkingLotRepository =
-      InMemoryRepositoryFactory.getParkingLotRepository();
-    const registerParkingEntry = new RegisterParkingEntry(parkingLotRepository);
-    const registerParkingExit = new RegisterParkingExit(parkingLotRepository);
+    const parkingLotRepository = repositoryFactory.getParkingLotRepository();
+    const registerParkingEntry = new RegisterParkingEntry(repositoryFactory);
+    const registerParkingExit = new RegisterParkingExit(repositoryFactory);
     await registerParkingEntry.execute(plate);
     await registerParkingExit.execute(plate);
 

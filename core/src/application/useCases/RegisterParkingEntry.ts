@@ -1,9 +1,15 @@
-import { ParkingLotRepository } from '../../domain/repositories';
+import {
+  ParkingLotRepository,
+  RepositoryFactory,
+} from '../../domain/repositories';
 import { ParkedVehicle } from '../../domain/entities';
 import { DuplicateParkingEntryException } from '../../domain/exceptions';
 
 export class RegisterParkingEntry {
-  constructor(private readonly parkingLotRepository: ParkingLotRepository) {}
+  private readonly parkingLotRepository: ParkingLotRepository;
+  constructor(repositoryFactory: RepositoryFactory) {
+    this.parkingLotRepository = repositoryFactory.getParkingLotRepository();
+  }
 
   async execute(plate: string): Promise<void> {
     if (await this.parkingLotRepository.getParkedVehicleByPlate(plate)) {

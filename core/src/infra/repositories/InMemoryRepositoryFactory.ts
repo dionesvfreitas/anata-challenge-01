@@ -1,8 +1,19 @@
 import { InMemoryParkingLotRepository } from './InMemoryParkingLotRepository';
-import { ParkingLotRepository } from '../../domain/repositories';
+import {
+  ParkingLotRepository,
+  RepositoryFactory,
+} from '../../domain/repositories';
 
-export class InMemoryRepositoryFactory {
-  static getParkingLotRepository(): ParkingLotRepository {
-    return new InMemoryParkingLotRepository();
+export class InMemoryRepositoryFactory implements RepositoryFactory {
+  private readonly repositories = new Map();
+  getParkingLotRepository(): ParkingLotRepository {
+    if (!this.repositories.has('ParkingLotRepository')) {
+      this.repositories.set(
+        'ParkingLotRepository',
+        new InMemoryParkingLotRepository()
+      );
+    }
+
+    return this.repositories.get('ParkingLotRepository');
   }
 }
